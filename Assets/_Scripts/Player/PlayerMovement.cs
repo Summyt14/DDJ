@@ -71,7 +71,7 @@ namespace _Scripts.Player
 
             HandleInput();
             StateMachine();
-            SpeedControl();
+            //SpeedControl();
             DragControl();
         }
 
@@ -143,6 +143,7 @@ namespace _Scripts.Player
                         State = MovementState.Crouching;
                         _desiredMoveSpeed = crouchSpeed;
                     }
+
                     break;
                 // Walking
                 case true:
@@ -160,7 +161,7 @@ namespace _Scripts.Player
             }
 
             // Check if desiredMoveSpeed has changed drastically
-            if (Mathf.Abs(_desiredMoveSpeed - _lastDesiredMoveSpeed) > 8f && _moveSpeed != 0 || IsSwinging)
+            if (Mathf.Abs(_desiredMoveSpeed - _lastDesiredMoveSpeed) > 8f && _moveSpeed != 0)
             {
                 StopAllCoroutines();
                 StartCoroutine(SmoothlyLerpMoveSpeed());
@@ -182,7 +183,7 @@ namespace _Scripts.Player
             else
             {
                 Vector3 flatVel = new(_rb.velocity.x, 0f, _rb.velocity.z);
-                if (flatVel.magnitude > _moveSpeed)
+                if (flatVel.magnitude > _moveSpeed && !_exitingSlope)
                 {
                     Vector3 limitedVel = flatVel.normalized * _moveSpeed;
                     _rb.velocity = new Vector3(limitedVel.x, _rb.velocity.y, limitedVel.z);
@@ -227,7 +228,7 @@ namespace _Scripts.Player
         private void MovePlayer()
         {
             if (IsSwinging && !_isGrounded) return;
-            
+
             // calculate move direction
             _moveDir = _transform.forward * InputHandler.instance.MoveVector.y +
                        _transform.right * InputHandler.instance.MoveVector.x;
@@ -254,6 +255,7 @@ namespace _Scripts.Player
                 _rb.useGravity = true;
                 _gravityForce += Physics.gravity * (gravityModifier * Time.deltaTime);
             }
+            else if (IsSwinging) _gravityForce = Vector3.zero;
 
             if (!IsSwinging) _rb.AddForce(_gravityForce, ForceMode.Acceleration);
         }

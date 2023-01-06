@@ -4,7 +4,8 @@ namespace _Scripts.Player
 {
     public class PlayerLook : MonoBehaviour
     {
-        [SerializeField] private Camera cam;
+        [SerializeField] private Transform cameraHolder;
+        [SerializeField] private Transform pivot;
         [SerializeField] private float sensX;
         [SerializeField] private float sensY;
         [SerializeField] private float gamepadSensX;
@@ -17,6 +18,13 @@ namespace _Scripts.Player
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+        }
+
+        private void Start()
+        {
+            cameraHolder.parent = pivot;
+            cameraHolder.localPosition = Vector3.zero;
+            cameraHolder.localRotation = Quaternion.identity;
         }
 
         private void Update()
@@ -32,14 +40,19 @@ namespace _Scripts.Player
                 mouseX = InputHandler.instance.LookVector.x * Time.deltaTime * gamepadSensX;
                 mouseY = InputHandler.instance.LookVector.y * Time.deltaTime * gamepadSensY;
             }
-        
 
             _yRotation += mouseX;
             _xRotation -= mouseY;
             _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
-        
-            cam.transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
-            transform.rotation = Quaternion.Euler(0, _yRotation, 0);
+            
+            pivot.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+            transform.Rotate(Vector3.up * mouseX);
+        }
+
+        private void FixedUpdate()
+        {
+            // cam.transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
+            // transform.rotation = Quaternion.Euler(0, _yRotation, 0);
         }
     }
 }

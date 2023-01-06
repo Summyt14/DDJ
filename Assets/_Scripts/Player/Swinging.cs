@@ -22,6 +22,11 @@ namespace _Scripts.Player
         [SerializeField] private float grappleTravelSpeed = 10f;
         [SerializeField] private float thresholdAngle;
         [SerializeField] private float swingAcceleration;
+        
+        [Header("OdmGear")]
+        [SerializeField] private float horizontalThrustForce;
+        [SerializeField] private float forwardThrustForce;
+        [SerializeField] private float extendCableSpeed;
 
         private Vector3 _swingPoint, _currentGrapplePosition, _velocity;
         private SpringJoint _joint;
@@ -38,24 +43,15 @@ namespace _Scripts.Player
         {
             if (InputHandler.instance.LeftClickBtn.WasPressedThisFrame()) StartSwing();
             if (InputHandler.instance.LeftClickBtn.WasReleasedThisFrame()) StopSwing();
-
-            if (_pm.IsSwinging)
-            {
-                float ropeAngle = Vector3.Angle(_joint.connectedAnchor - transform.position, Vector3.up);
-
-                if (Mathf.Abs(ropeAngle) > thresholdAngle)
-                {
-                    _rb.AddForce(_velocity * (swingAcceleration * Mathf.Sign(ropeAngle)), ForceMode.Acceleration);
-                }
-
-                _velocity = _rb.velocity;
-            }
+            
+            if (_joint != null) OdmGearMovement();
         }
 
         private void StartSwing()
         {
             if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, maxSwingDistance, grappleMask))
             {
+                if (!lr.enabled) lr.enabled = true;
                 _pm.IsSwinging = true;
                 _swingPoint = hitInfo.point;
                 _joint = player.gameObject.AddComponent<SpringJoint>();
@@ -81,6 +77,46 @@ namespace _Scripts.Player
             lr.positionCount = 0;
             Destroy(_joint);
             _pm.IsSwinging = false;
+        }
+
+        private void OdmGearMovement()
+        {
+            switch (InputHandler.instance.MoveVector.x)
+            {
+                case > 0: // right
+                    _rb.AddForce(transform.right * (horizontalThrustForce * Time.deltaTime), ForceMode.Acceleration);
+                    break;
+                case < 0: // left
+                    _rb.AddForce(-transform.right * (horizontalThrustForce * Time.deltaTime), ForceMode.Acceleration);
+                    break;
+            }
+
+            switch (InputHandler.instance.MoveVector.y)
+            {
+                case > 0: // forward
+                    _rb.AddForce(player.forward * (horizontalThrustForce * Time.deltaTime), ForceMode.Acceleration);
+                    break;
+                case < 0: // extend cable
+                {
+                    float extendedDistanceFromPoint = Vector3.Distance(transform.position, _swingPoint) + extendCableSpeed;
+
+                    _joint.maxDistance = extendedDistanceFromPoint * jointMaxDistance;
+                    _joint.minDistance = extendedDistanceFromPoint * jointMinDistance;
+                    break;
+                }
+            }
+
+            // shorten cable
+            if (InputHandler.instance.JumpBtn.IsPressed())
+            {
+                Vector3 directionToPoint = _swingPoint - transform.position;
+                _rb.AddForce(directionToPoint.normalized * (forwardThrustForce * Time.deltaTime), ForceMode.Acceleration);
+
+                float distanceFromPoint = Vector3.Distance(transform.position, _swingPoint);
+
+                _joint.maxDistance = distanceFromPoint * jointMaxDistance;
+                _joint.minDistance = distanceFromPoint * jointMinDistance;
+            }
         }
 
         private void LateUpdate()
