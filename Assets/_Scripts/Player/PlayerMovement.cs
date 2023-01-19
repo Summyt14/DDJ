@@ -227,6 +227,7 @@ namespace _Scripts.Player
 
         private void MovePlayer()
         {
+            if (IsSwinging) _gravityForce = Vector3.zero;
             if (IsSwinging && !_isGrounded) return;
 
             // calculate move direction
@@ -255,7 +256,6 @@ namespace _Scripts.Player
                 _rb.useGravity = true;
                 _gravityForce += Physics.gravity * (gravityModifier * Time.deltaTime);
             }
-            else if (IsSwinging) _gravityForce = Vector3.zero;
 
             if (!IsSwinging) _rb.AddForce(_gravityForce, ForceMode.Acceleration);
         }
