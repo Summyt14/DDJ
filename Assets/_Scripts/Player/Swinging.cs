@@ -41,6 +41,13 @@ namespace _Scripts.Player
 
         private void Update()
         {
+            if (_pm.State is PlayerMovement.MovementState.Freeze or PlayerMovement.MovementState.Grappling)
+            {
+                if (_joint) Destroy(_joint);
+                _pm.IsSwinging = false;
+                return;
+            }
+            
             if (InputHandler.instance.LeftClickBtn.WasPressedThisFrame()) StartSwing();
             if (InputHandler.instance.LeftClickBtn.WasReleasedThisFrame()) StopSwing();
             

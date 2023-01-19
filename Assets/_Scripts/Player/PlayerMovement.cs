@@ -12,6 +12,8 @@ namespace _Scripts.Player
         {
             Air,
             Crouching,
+            Freeze,
+            Grappling,
             Sliding,
             Sprinting,
             Swinging,
@@ -20,6 +22,7 @@ namespace _Scripts.Player
 
         public MovementState State { get; private set; }
         public bool IsSwinging { get; set; }
+        public bool IsFrozen { get; set; }
 
         [Header("Movement")] [SerializeField] private float walkSpeed = 7f;
         [SerializeField] private float sprintSpeed = 10f;
@@ -51,10 +54,10 @@ namespace _Scripts.Player
         [SerializeField] private TextMeshProUGUI speedText;
 
         private Rigidbody _rb;
-        private Vector3 _moveDir, _initialLocalScale, _gravityForce;
+        private Vector3 _moveDir, _initialLocalScale, _gravityForce, _velocityToSet;
         private Transform _transform;
         private float _moveSpeed, _desiredMoveSpeed, _lastDesiredMoveSpeed, _slideTimer;
-        private bool _isGrounded, _canJump = true, _exitingSlope, _isSliding;
+        private bool _isGrounded, _canJump = true, _exitingSlope, _isSliding, _isGrappling, _enableMovementOnNextTouch;
 
         private void Awake()
         {
@@ -122,6 +125,16 @@ namespace _Scripts.Player
 
         private void StateMachine()
         {
+            if (IsFrozen)
+            {
+                State = MovementState.Freeze;
+                _moveSpeed = 0;
+                _desiredMoveSpeed = 0;
+                _gravityForce = Vector3.zero;
+                _rb.velocity = Vector3.zero;
+                return;
+            }
+
             switch (_isGrounded)
             {
                 // Sprinting
@@ -149,6 +162,9 @@ namespace _Scripts.Player
                 case true:
                     State = MovementState.Walking;
                     _desiredMoveSpeed = walkSpeed;
+                    break;
+                case false when _isGrappling:
+                    State = MovementState.Grappling;
                     break;
                 case false when IsSwinging:
                     State = MovementState.Swinging;
@@ -193,6 +209,12 @@ namespace _Scripts.Player
 
         private void DragControl()
         {
+            if (_isGrappling)
+            {
+                _rb.drag = 0f;
+                return;
+            }
+
             _rb.drag = _isGrounded ? groundDrag : airDrag;
         }
 
@@ -228,7 +250,7 @@ namespace _Scripts.Player
         private void MovePlayer()
         {
             if (IsSwinging) _gravityForce = Vector3.zero;
-            if (IsSwinging && !_isGrounded) return;
+            if (IsSwinging && !_isGrounded || _isGrappling) return;
 
             // calculate move direction
             _moveDir = _transform.forward * InputHandler.instance.MoveVector.y +
@@ -290,6 +312,45 @@ namespace _Scripts.Player
             slopeMoveDir = Vector3.zero;
             slopeAngle = 0f;
             return false;
+        }
+
+        public void JumpToPosition(Vector3 target, float trajectoryHeight)
+        {
+            float gravity = Physics.gravity.y;
+            Vector3 playerPosition = transform.position;
+            float displacementY = target.y - playerPosition.y;
+            Vector3 displacementXZ = new(target.x - playerPosition.x, 0f, target.z - playerPosition.z);
+
+            Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
+            float time = Mathf.Sqrt(-2 * trajectoryHeight / gravity) +
+                         Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity);
+            Vector3 velocityXZ = displacementXZ / (time * 0.25f);
+
+            _velocityToSet = velocityXZ + velocityY;
+            _isGrappling = true;
+            Invoke(nameof(SetVelocity), 0.1f);
+            // Invoke(nameof(ResetRestrictions), 3f);
+        }
+
+        private void SetVelocity()
+        {
+            _enableMovementOnNextTouch = true;
+            _rb.velocity = _velocityToSet;
+        }
+
+        private void ResetRestrictions()
+        {
+            _isGrappling = false;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (_enableMovementOnNextTouch)
+            {
+                _enableMovementOnNextTouch = false;
+                ResetRestrictions();
+                GetComponent<Grappling>().StopGrapple();
+            }
         }
     }
 }
