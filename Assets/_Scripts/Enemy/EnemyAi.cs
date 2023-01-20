@@ -39,6 +39,7 @@ public class EnemyAi : MonoBehaviour
 
     private float LastShootTime;
 
+
     private void Awake()
     {
         player = GameObject.Find("Capsule").transform;
@@ -95,6 +96,7 @@ public class EnemyAi : MonoBehaviour
 
             if (LastShootTime + ShootDelay < Time.time) {
                 Vector3 direction = GetDirection();
+                
 
                 if (Physics.Raycast(BulletSpawnPoint.position, direction, out RaycastHit hit, float.MaxValue, Mask)) {
                     TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);

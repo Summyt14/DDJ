@@ -33,6 +33,7 @@ namespace _Scripts.Player
         private PlayerMovement _pm;
         private Rigidbody _rb;
 
+
         private void Awake()
         {
             _pm = player.gameObject.GetComponent<PlayerMovement>();
@@ -59,6 +60,7 @@ namespace _Scripts.Player
             if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, maxSwingDistance, grappleMask))
             {
                 if (!lr.enabled) lr.enabled = true;
+
                 _pm.IsSwinging = true;
                 _swingPoint = hitInfo.point;
                 _joint = player.gameObject.AddComponent<SpringJoint>();

@@ -23,6 +23,8 @@ namespace _Scripts.Player
         private PlayerMovement _pm;
         private Rigidbody _rb;
 
+
+
         private void Awake()
         {
             _pm = player.gameObject.GetComponent<PlayerMovement>();
@@ -42,7 +44,8 @@ namespace _Scripts.Player
             _pm.IsFrozen = true;
             _hasFinishedGrapple = false;
             lr.positionCount = 2;
-            
+
+                      
             if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, maxGrappleDistance, grappleMask))
             {
                 _grapplePoint = hitInfo.point;
