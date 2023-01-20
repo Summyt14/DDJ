@@ -482,7 +482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -114, y: -305}
+  m_AnchoredPosition: {x: -114, y: -252}
   m_SizeDelta: {x: 1280, y: 321}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397647012
@@ -505,17 +505,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Mouse 1 to use the grappling hook.
+  m_text: '- Left mouse button to use the grappling hook and right mouse button to
+    kill enemies after a certain speed.
 
 
-    - W, A, S, D, for player movement.
+    - W, A, S, D, for player movement and
+    space to jump.
 
 
-    -
-    Space to jump
-
-
-    - Shift to slide'
+    - CTRL to slide, Shift to run.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -942,7 +940,7 @@ MonoBehaviour:
 
 
     - Speed is important,
-    use da grappling hook to gain speed and not get killed by the enemies.'
+    use the grappling hook to gain speed and kill the enemies and dodge their bullets.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1316,7 +1314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1226637768
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1844,7 +1842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1685943982
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2185,7 +2183,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -651, y: -42}
+  m_AnchoredPosition: {x: -651, y: -12}
   m_SizeDelta: {x: 460.4, y: 105.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1787200164
