@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Audio;
 using UnityEngine;
 
 namespace _Scripts.Player
@@ -7,6 +8,8 @@ namespace _Scripts.Player
     {
         [Header("References")] [SerializeField]
         private LineRenderer lr;
+        [SerializeField] private Transform grappleClaw;
+        [SerializeField] private Transform[] grappleChildren;
 
         [SerializeField] private Transform gunTip;
         [SerializeField] private Transform cam;
@@ -22,9 +25,7 @@ namespace _Scripts.Player
         private bool _isGrappling, _hasFinishedGrapple = true;
         private PlayerMovement _pm;
         private Rigidbody _rb;
-
-
-
+        
         private void Awake()
         {
             _pm = player.gameObject.GetComponent<PlayerMovement>();
@@ -33,29 +34,30 @@ namespace _Scripts.Player
 
         private void Update()
         {
-            if (InputHandler.instance.RightClickBtn.WasPressedThisFrame()) StartGrapple();
+            if (InputHandler.instance.LeftClickBtn.WasPressedThisFrame()) StartGrapple();
         }
 
         private void StartGrapple()
         {
             if (!_hasFinishedGrapple) return;
-            if (!lr.enabled) lr.enabled = true;
-            _isGrappling = true;
-            _pm.IsFrozen = true;
-            _hasFinishedGrapple = false;
-            lr.positionCount = 2;
-
-                      
+            
             if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, maxGrappleDistance, grappleMask))
             {
+                if (!lr.enabled) lr.enabled = true;
+                _isGrappling = true;
+                _pm.IsFrozen = true;
+                _hasFinishedGrapple = false;
+                lr.positionCount = 2;
+
                 _grapplePoint = hitInfo.point;
                 _currentGrapplePosition = gunTip.position;
+                
+                grappleClaw.gameObject.layer = LayerMask.NameToLayer("Default");
+                foreach (Transform child in grappleChildren)
+                    child.gameObject.layer = LayerMask.NameToLayer("Default");
+                
+                AudioManager.Instance.PlaySound(AudioSo.Sounds.GrappleShoot, gunTip.position);
                 Invoke(nameof(ExecuteGrapple), grappleDelayTime);
-            }
-            else
-            {
-                _grapplePoint = cam.position + cam.forward * maxGrappleDistance;
-                Invoke(nameof(StopGrapple), grappleDelayTime);
             }
         }
 
@@ -79,6 +81,11 @@ namespace _Scripts.Player
             _pm.IsFrozen = false;
             _hasFinishedGrapple = true;
             lr.positionCount = 0;
+            
+            grappleClaw.position = gunTip.position;
+            grappleClaw.gameObject.layer = LayerMask.NameToLayer("Grapple");
+            foreach (Transform child in grappleChildren)
+                child.gameObject.layer = LayerMask.NameToLayer("Grapple");
         }
 
         private void LateUpdate()
@@ -86,6 +93,7 @@ namespace _Scripts.Player
             if (!_isGrappling) return;
             _currentGrapplePosition =
                 Vector3.Lerp(_currentGrapplePosition, _grapplePoint, Time.deltaTime * grappleTravelSpeed);
+            grappleClaw.position = Vector3.Lerp(_currentGrapplePosition, _grapplePoint, Time.deltaTime * grappleTravelSpeed);
 
             lr.SetPosition(0, gunTip.position);
             lr.SetPosition(1, _currentGrapplePosition);

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using _Scripts.Audio;
 using UnityEngine;
 
 namespace _Scripts.Player
@@ -7,6 +9,8 @@ namespace _Scripts.Player
     {
         [Header("References")] [SerializeField]
         private LineRenderer lr;
+        [SerializeField] private Transform grappleClaw;
+        [SerializeField] private Transform[] grappleChildren;
 
         [SerializeField] private Transform gunTip;
         [SerializeField] private Transform cam;
@@ -32,7 +36,6 @@ namespace _Scripts.Player
         private SpringJoint _joint;
         private PlayerMovement _pm;
         private Rigidbody _rb;
-
 
         private void Awake()
         {
@@ -78,6 +81,11 @@ namespace _Scripts.Player
 
                 lr.positionCount = 2;
                 _currentGrapplePosition = gunTip.position;
+                grappleClaw.gameObject.layer = LayerMask.NameToLayer("Default");
+                foreach (Transform child in grappleChildren)
+                    child.gameObject.layer = LayerMask.NameToLayer("Default");
+                
+                AudioManager.Instance.PlaySound(AudioSo.Sounds.GrappleShoot, gunTip.position);
             }
         }
 
@@ -86,6 +94,11 @@ namespace _Scripts.Player
             lr.positionCount = 0;
             Destroy(_joint);
             _pm.IsSwinging = false;
+            
+            grappleClaw.position = gunTip.position;
+            grappleClaw.gameObject.layer = LayerMask.NameToLayer("Grapple");
+            foreach (Transform child in grappleChildren)
+                child.gameObject.layer = LayerMask.NameToLayer("Grapple");
         }
 
         private void OdmGearMovement()
@@ -134,6 +147,7 @@ namespace _Scripts.Player
 
             _currentGrapplePosition =
                 Vector3.Lerp(_currentGrapplePosition, _swingPoint, Time.deltaTime * grappleTravelSpeed);
+            grappleClaw.position = Vector3.Lerp(_currentGrapplePosition, _swingPoint, Time.deltaTime * grappleTravelSpeed);
 
             lr.SetPosition(0, gunTip.position);
             lr.SetPosition(1, _currentGrapplePosition);

@@ -52,6 +52,7 @@ namespace _Scripts.Player
         [SerializeField] private float crouchYScale = 0.5f;
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private TextMeshProUGUI speedText;
+        [SerializeField] private Transform[] children;
 
         private Rigidbody _rb;
         private Vector3 _moveDir, _initialLocalScale, _gravityForce, _velocityToSet;
@@ -64,7 +65,7 @@ namespace _Scripts.Player
             _rb = GetComponent<Rigidbody>();
             _rb.freezeRotation = true;
             _transform = transform;
-            _initialLocalScale = _transform.localScale;
+            _initialLocalScale = children[0].localScale;
         }
 
         private void Update()
@@ -105,9 +106,9 @@ namespace _Scripts.Player
             // handle crouching
             if (InputHandler.instance.CrouchBtn.WasPressedThisFrame())
             {
-                Vector3 localScale = _transform.localScale;
-                localScale = new Vector3(localScale.x, crouchYScale, localScale.z);
-                _transform.localScale = localScale;
+                Vector3 localScale = children[0].localScale;
+                localScale = new Vector3(children[0].localScale.x, crouchYScale, children[0].localScale.z);
+                children[0].localScale = localScale;
                 if (_isGrounded) _rb.AddForce(Vector3.down * 300f, ForceMode.Impulse);
                 if (InputHandler.instance.MoveVector.magnitude != 0)
                 {
@@ -118,7 +119,7 @@ namespace _Scripts.Player
 
             if (InputHandler.instance.CrouchBtn.WasReleasedThisFrame())
             {
-                _transform.localScale = _initialLocalScale;
+                children[0].localScale = _initialLocalScale;
                 if (_isSliding) _isSliding = false;
             }
         }
@@ -324,7 +325,7 @@ namespace _Scripts.Player
             Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
             float time = Mathf.Sqrt(-2 * trajectoryHeight / gravity) +
                          Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity);
-            Vector3 velocityXZ = displacementXZ / (time * 0.25f);
+            Vector3 velocityXZ = displacementXZ / (time);
 
             _velocityToSet = velocityXZ + velocityY;
             _isGrappling = true;
