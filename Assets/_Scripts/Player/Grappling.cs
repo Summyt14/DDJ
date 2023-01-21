@@ -56,6 +56,9 @@ namespace _Scripts.Player
                 foreach (Transform child in grappleChildren)
                     child.gameObject.layer = LayerMask.NameToLayer("Default");
                 
+                if (hitInfo.transform.parent.parent.TryGetComponent(out Enemy.Enemy enemy))
+                    enemy.SetGrabbed();
+                
                 AudioManager.Instance.PlaySound(AudioSo.Sounds.GrappleShoot, gunTip.position);
                 Invoke(nameof(ExecuteGrapple), grappleDelayTime);
             }

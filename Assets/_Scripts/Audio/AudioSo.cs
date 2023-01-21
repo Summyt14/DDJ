@@ -11,6 +11,7 @@ namespace _Scripts.Audio
             GrappleShoot,
             RobotExplosion,
             RobotWalk,
+            RobotShoot
         }
 
         public Sounds soundType;

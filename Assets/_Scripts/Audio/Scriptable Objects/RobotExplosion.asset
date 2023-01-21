@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ad3c271d3726940900c8e803461faf, type: 3}
+  m_Name: RobotExplosion
+  m_EditorClassIdentifier: 
+  soundType: 2
+  audioClip: {fileID: 8300000, guid: 4a5d0b63cf7590543a473513cb78d78f, type: 3}
+  volume: 0.1
+  loop: 0
