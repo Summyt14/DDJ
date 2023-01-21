@@ -26,6 +26,7 @@ namespace _Scripts.Enemy
         [SerializeField] private float ShootDelay = 0.5f;
         [SerializeField] private LayerMask Mask;
         [SerializeField] private float BulletSpeed = 100;
+        [SerializeField] private GameObject explosionParticle;
 
         private bool _walkPointSet, _isGrabbed;
         private float _lastShootTime;
@@ -107,6 +108,7 @@ namespace _Scripts.Enemy
         private void DestroyEnemy()
         {
             if (GameManager.Instance) GameManager.Instance.EnemiesAlive -= 1;
+            Instantiate(explosionParticle, transform.position, Quaternion.identity);
             AudioManager.Instance.PlaySound(AudioSo.Sounds.RobotExplosion, transform.position);
             Destroy(gameObject);
         }

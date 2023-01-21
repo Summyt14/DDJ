@@ -227,6 +227,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   BulletSpeed: 150
+  explosionParticle: {fileID: 1902471922672065790, guid: 67b6103e0af7f6442818d0741bc8b73c, type: 3}
 --- !u!1 &5620547536437033155
 GameObject:
   m_ObjectHideFlags: 0
