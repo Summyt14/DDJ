@@ -2,6 +2,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Scripts.Player
 {
@@ -349,8 +350,6 @@ namespace _Scripts.Player
             if (_enableMovementOnNextTouch)
             {
                 _enableMovementOnNextTouch = false;
-                if (_isGrappling && collision.transform.parent.parent.TryGetComponent(out Enemy.Enemy enemy))
-                    enemy.TakeDamage(1000);
                 ResetRestrictions();
                 GetComponent<Grappling>().StopGrapple();
             }
