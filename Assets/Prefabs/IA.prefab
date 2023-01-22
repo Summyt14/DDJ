@@ -214,20 +214,20 @@ MonoBehaviour:
   health: 1
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 4
-  sightRange: 30
-  attackRange: 20
+  sightRange: 50
+  attackRange: 40
   playerInSightRange: 0
   playerInAttackRange: 0
   AddBulletSpread: 1
-  BulletSpreadVariance: {x: 0, y: 0, z: 0}
+  BulletSpreadVariance: {x: 0.1, y: 0.1, z: 0}
   BulletSpawnPoint: {fileID: 162347427429540360}
   BulletTrail: {fileID: 101493428107786856}
   ShootDelay: 0.4
   Mask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 8
   BulletSpeed: 150
-  bulletDamage: 25
+  bulletDamage: 5
   explosionParticle: {fileID: 1902471922672065790, guid: 67b6103e0af7f6442818d0741bc8b73c, type: 3}
 --- !u!1 &5620547536437033155
 GameObject:
