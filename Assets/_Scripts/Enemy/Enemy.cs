@@ -95,9 +95,9 @@ namespace _Scripts.Enemy
                 }
                 else
                 {
-                    // TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
-                    // StartCoroutine(SpawnTrail(trail, BulletSpawnPoint.position + GetDirection() * 100, Vector3.zero,
-                    //     false));
+                    TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
+                    StartCoroutine(SpawnTrail(trail, BulletSpawnPoint.position + GetDirection() * 100, Vector3.zero,
+                        false));
                     _lastShootTime = Time.time;
                 }
                 
