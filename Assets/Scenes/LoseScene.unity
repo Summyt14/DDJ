@@ -1411,7 +1411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0995c5b6a40d4684f8cba9a9934411ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restartGameScene: SampleScene
+  restartGameScene: Map
   mainMenuScene: MainMenu
 --- !u!1 &1771751898
 GameObject:
