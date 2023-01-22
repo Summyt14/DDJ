@@ -85,17 +85,19 @@ namespace _Scripts.Enemy
                 Vector3 direction = GetDirection();
                 if (Physics.Raycast(BulletSpawnPoint.position, direction, out RaycastHit hit, float.MaxValue, Mask))
                 {
-                    TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
-                    StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
-                    _lastShootTime = Time.time;
                     if (hit.transform.TryGetComponent(out PlayerMovement _))
+                    {
                         GameManager.Instance.PlayerHealth -= bulletDamage;
+                        TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
+                        StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
+                        _lastShootTime = Time.time;
+                    }
                 }
                 else
                 {
-                    TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
-                    StartCoroutine(SpawnTrail(trail, BulletSpawnPoint.position + GetDirection() * 100, Vector3.zero,
-                        false));
+                    // TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
+                    // StartCoroutine(SpawnTrail(trail, BulletSpawnPoint.position + GetDirection() * 100, Vector3.zero,
+                    //     false));
                     _lastShootTime = Time.time;
                 }
                 
