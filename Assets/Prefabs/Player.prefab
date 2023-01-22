@@ -39,7 +39,7 @@ Transform:
   - {fileID: 2832533016356570542}
   - {fileID: 2832533016581390838}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2832533016336708893
 Rigidbody:
@@ -318,6 +318,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   speedText: {fileID: 0}
+  children:
+  - {fileID: 2832533016356570542}
+  - {fileID: 2832533016581390838}
 --- !u!114 &2832533016336708889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +344,7 @@ MonoBehaviour:
   grappleMask:
     serializedVersion: 2
     m_Bits: 64
-  maxSwingDistance: 25
+  maxSwingDistance: 40
   jointSpring: 4.5
   jointDamper: 8
   jointMassScale: 500
@@ -376,10 +379,11 @@ MonoBehaviour:
   grappleMask:
     serializedVersion: 2
     m_Bits: 512
-  maxGrappleDistance: 25
+  maxGrappleDistance: 30
   grappleDelayTime: 0.2
   grappleTravelSpeed: 10
   overshootYAxis: 1
+  speedToGrappleEnemy: 20
 --- !u!120 &2832533016336708888
 LineRenderer:
   serializedVersion: 2
