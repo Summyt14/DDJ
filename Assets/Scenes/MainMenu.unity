@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 397647013}
   - component: {fileID: 397647012}
   m_Layer: 5
-  m_Name: HowToPlayInfo
+  m_Name: ControlsInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -480,10 +480,10 @@ RectTransform:
   m_Father: {fileID: 1226637768}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -114, y: -252}
-  m_SizeDelta: {x: 1280, y: 321}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -240.02}
+  m_SizeDelta: {x: -200, y: 321}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &397647012
 MonoBehaviour:
@@ -505,15 +505,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Left mouse button to use the grappling hook and right mouse button to
-    kill enemies after a certain speed.
+  m_text: '- WASD to move
 
+    - Left Mouse Click to swing and grapple enemies
 
-    - W, A, S, D, for player movement and
-    space to jump.
+    -
+    Left Shift to run
 
-
-    - CTRL to slide, Shift to run.'
+    - Left Ctrl to slide and crouch'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -540,8 +539,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -885,7 +884,7 @@ GameObject:
   - component: {fileID: 901908661}
   - component: {fileID: 901908660}
   m_Layer: 5
-  m_Name: AboutTheGameInfo
+  m_Name: HowToPlayInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -906,11 +905,11 @@ RectTransform:
   m_Father: {fileID: 1226637768}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: 212}
-  m_SizeDelta: {x: 1538.7, y: 321}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -150}
+  m_SizeDelta: {x: -200, y: 321}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &901908660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,16 +930,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- The player controls a character who is equipped with a grappling hook,
-    that he can use to swing through the map and navigate around obstacles.
+  m_text: '- Use your grappling hook to swing through the map and build momentum
+    to gain speed and to dodge the bullets
 
-
-    -
-    The hook can also be used as a weapon to kill enemies.
-
-
-    - Speed is important,
-    use the grappling hook to gain speed and kill the enemies and dodge their bullets.'
+    - At the right speed, you can grapple
+    the robots to destroy them'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -967,10 +961,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 36
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -1052,11 +1046,11 @@ RectTransform:
   m_Father: {fileID: 1226637768}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 807, y: -464}
-  m_SizeDelta: {x: 266.92, y: 115.5}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -25, y: 25}
+  m_SizeDelta: {x: 266.92004, y: 115.5}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &1186457345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1338,7 +1332,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1226637769
 MonoBehaviour:
@@ -1364,7 +1358,7 @@ GameObject:
   - component: {fileID: 1376217452}
   - component: {fileID: 1376217451}
   m_Layer: 5
-  m_Name: AboutTheGameTitle
+  m_Name: HowToPlayTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1385,11 +1379,11 @@ RectTransform:
   m_Father: {fileID: 1226637768}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -591, y: 451}
-  m_SizeDelta: {x: 537.88, y: 105.6}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 25, y: -25}
+  m_SizeDelta: {x: 537.88, y: 105.600006}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &1376217451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1410,9 +1404,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'About The Game
-
-'
+  m_text: How to play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1439,14 +1431,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70.6
-  m_fontSizeBase: 36
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 36
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2160,7 +2152,7 @@ GameObject:
   - component: {fileID: 1787200165}
   - component: {fileID: 1787200164}
   m_Layer: 5
-  m_Name: HowToPlayTitle
+  m_Name: ControlsTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2181,11 +2173,11 @@ RectTransform:
   m_Father: {fileID: 1226637768}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -651, y: -12}
-  m_SizeDelta: {x: 460.4, y: 105.6}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 24.999939, y: 52.799973}
+  m_SizeDelta: {x: 537.88, y: 105.6}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &1787200164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2206,9 +2198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'How To Play
-
-'
+  m_text: Controls
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2242,7 +2232,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 36
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

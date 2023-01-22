@@ -227,6 +227,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   BulletSpeed: 150
+  bulletDamage: 25
   explosionParticle: {fileID: 1902471922672065790, guid: 67b6103e0af7f6442818d0741bc8b73c, type: 3}
 --- !u!1 &5620547536437033155
 GameObject:
@@ -10121,7 +10122,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5620917295524307797}
-  m_LocalRotation: {x: 0.032617275, y: 0.009041359, z: 0.0018176099, w: 0.99942535}
+  m_LocalRotation: {x: -0.0069984505, y: 0.008962261, z: 0.0021743376, w: 0.999933}
   m_LocalPosition: {x: 0, y: 1.0870003, z: -0.600985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10129,7 +10130,7 @@ Transform:
   - {fileID: 5623635122951096663}
   m_Father: {fileID: 5623417608728105947}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 3.736, y: 1.045, z: 0.242}
+  m_LocalEulerAnglesHint: {x: -0.804, y: 1.025, z: 0.242}
 --- !u!33 &5655878936673827329
 MeshFilter:
   m_ObjectHideFlags: 0

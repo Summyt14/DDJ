@@ -1,5 +1,6 @@
 using System.Collections;
 using _Scripts.Audio;
+using _Scripts.Player;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,6 +27,7 @@ namespace _Scripts.Enemy
         [SerializeField] private float ShootDelay = 0.5f;
         [SerializeField] private LayerMask Mask;
         [SerializeField] private float BulletSpeed = 100;
+        [SerializeField] private int bulletDamage = 25;
         [SerializeField] private GameObject explosionParticle;
 
         private bool _walkPointSet, _isGrabbed;
@@ -86,6 +88,8 @@ namespace _Scripts.Enemy
                     TrailRenderer trail = Instantiate(BulletTrail, BulletSpawnPoint.position, Quaternion.identity);
                     StartCoroutine(SpawnTrail(trail, hit.point, hit.normal, true));
                     _lastShootTime = Time.time;
+                    if (hit.transform.TryGetComponent(out PlayerMovement _))
+                        GameManager.Instance.PlayerHealth -= bulletDamage;
                 }
                 else
                 {

@@ -350,6 +350,8 @@ namespace _Scripts.Player
             if (_enableMovementOnNextTouch)
             {
                 _enableMovementOnNextTouch = false;
+                if (_isGrappling && collision.transform.parent.parent.TryGetComponent(out Enemy.Enemy enemy))
+                    enemy.TakeDamage(1000);
                 ResetRestrictions();
                 GetComponent<Grappling>().StopGrapple();
             }

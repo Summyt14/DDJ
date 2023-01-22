@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,8 @@ namespace _Scripts
         [SerializeField] private Transform[] enemySpawnPoints;
         [SerializeField] private Transform player;
         [SerializeField] private GameObject enemyPrefab;
+        [SerializeField] private TextMeshProUGUI healthText;
+        [SerializeField] private TextMeshProUGUI enemiesText;
         [SerializeField] private string winSceneName;
         [SerializeField] private string loseSceneName;
         [SerializeField] private int playerMaxHealth = 100;
@@ -32,9 +35,6 @@ namespace _Scripts
                 Destroy(gameObject);
                 return;
             }
-
-            EnemiesAlive = enemySpawnPoints.Length;
-            PlayerHealth = playerMaxHealth;
         }
 
         private void Start()
@@ -44,10 +44,18 @@ namespace _Scripts
                 Enemy.Enemy enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity).GetComponent<Enemy.Enemy>();
                 enemy.SetPlayer(player);
             }
+            
+            EnemiesAlive = enemySpawnPoints.Length;
+            PlayerHealth = playerMaxHealth;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void Update()
         {
+            if (healthText) healthText.text = "Health: " + PlayerHealth;
+            if (enemiesText) enemiesText.text = "Enemies Alive: " + EnemiesAlive;
+            
             if (EnemiesAlive <= 0)
             {
                 SceneManager.LoadScene(winSceneName);
