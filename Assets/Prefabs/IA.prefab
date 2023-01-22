@@ -219,7 +219,7 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInAttackRange: 0
   AddBulletSpread: 1
-  BulletSpreadVariance: {x: 0.05, y: 0.05, z: 0.05}
+  BulletSpreadVariance: {x: 0, y: 0, z: 0}
   BulletSpawnPoint: {fileID: 162347427429540360}
   BulletTrail: {fileID: 101493428107786856}
   ShootDelay: 0.4

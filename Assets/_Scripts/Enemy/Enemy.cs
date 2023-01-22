@@ -119,7 +119,7 @@ namespace _Scripts.Enemy
 
         private Vector3 GetDirection()
         {
-            Vector3 direction = transform.forward;
+            Vector3 direction = (player.position - transform.position).normalized;
 
             if (AddBulletSpread)
             {
@@ -132,7 +132,7 @@ namespace _Scripts.Enemy
                 direction.Normalize();
             }
 
-            return direction;
+            return direction + new Vector3(0, -0.1f, 0);
         }
 
         private IEnumerator SpawnTrail(TrailRenderer trail, Vector3 hitPoint, Vector3 hitNormal, bool madeImpact)
