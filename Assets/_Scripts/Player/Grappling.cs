@@ -20,6 +20,7 @@ namespace _Scripts.Player
         [SerializeField] private float grappleDelayTime;
         [SerializeField] private float grappleTravelSpeed;
         [SerializeField] private float overshootYAxis;
+        [SerializeField] private float speedToGrappleEnemy = 25f;
 
         private Vector3 _grapplePoint, _currentGrapplePosition;
         private bool _isGrappling, _hasFinishedGrapple = true;
@@ -43,6 +44,7 @@ namespace _Scripts.Player
             
             if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hitInfo, maxGrappleDistance, grappleMask))
             {
+                if (_pm.Speed < speedToGrappleEnemy) return;
                 if (!lr.enabled) lr.enabled = true;
                 _isGrappling = true;
                 _pm.IsFrozen = true;

@@ -16845,6 +16845,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1863578764}
     - target: {fileID: 2832533016336708889, guid: 02f8348f8ce2e3442accd2e2ac34adf0, type: 3}
+      propertyPath: maxSwingDistance
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832533016336708889, guid: 02f8348f8ce2e3442accd2e2ac34adf0, type: 3}
       propertyPath: grappleChildren.Array.data[0]
       value: 
       objectReference: {fileID: 4630544833540505872}

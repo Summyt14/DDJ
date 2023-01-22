@@ -24,6 +24,7 @@ namespace _Scripts.Player
         public MovementState State { get; private set; }
         public bool IsSwinging { get; set; }
         public bool IsFrozen { get; set; }
+        public float Speed { get; set; }
 
         [Header("Movement")] [SerializeField] private float walkSpeed = 7f;
         [SerializeField] private float sprintSpeed = 10f;
@@ -74,6 +75,7 @@ namespace _Scripts.Player
             _isGrounded = Physics.Raycast(_transform.position, Vector3.down,
                 playerHeight * 0.5f + 0.2f, groundLayer);
 
+            Speed = (float)Math.Round(new Vector2(_rb.velocity.x, _rb.velocity.z).magnitude, 2);
             HandleInput();
             StateMachine();
             //SpeedControl();
@@ -88,8 +90,7 @@ namespace _Scripts.Player
 
         private void LateUpdate()
         {
-            if (speedText)
-                speedText.text = "Speed: " + Math.Round(new Vector2(_rb.velocity.x, _rb.velocity.z).magnitude, 2);
+            if (speedText) speedText.text = "Speed: " + Speed;
         }
 
         private void HandleInput()
