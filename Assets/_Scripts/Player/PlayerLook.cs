@@ -49,13 +49,8 @@ namespace _Scripts.Player
 
         private void FixedUpdate()
         {
-            // cam.transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
-            // transform.rotation = Quaternion.Euler(0, _yRotation, 0);
-            
             pivot.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
             transform.Rotate(Vector3.up * _mouseX);
-            // Quaternion target = Quaternion.Euler(0, _mouseX, 0);
-            // transform.rotation = Quaternion.RotateTowards(transform.rotation, target, 1f);
         }
     }
 }

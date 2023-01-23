@@ -26156,6 +26156,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 148219047}
     - target: {fileID: 2832533016336708891, guid: 02f8348f8ce2e3442accd2e2ac34adf0, type: 3}
+      propertyPath: sensX
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832533016336708891, guid: 02f8348f8ce2e3442accd2e2ac34adf0, type: 3}
+      propertyPath: sensY
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832533016336708891, guid: 02f8348f8ce2e3442accd2e2ac34adf0, type: 3}
       propertyPath: cameraHolder
       value: 
       objectReference: {fileID: 1395488312}
