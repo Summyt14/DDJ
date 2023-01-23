@@ -13,6 +13,8 @@ namespace _Scripts.Player
 
         private float _xRotation;
         private float _yRotation;
+        private float _mouseX;
+        private float _mouseY;
 
         private void Awake()
         {
@@ -29,30 +31,31 @@ namespace _Scripts.Player
 
         private void Update()
         {
-            float mouseX = 0, mouseY = 0;
             if (InputHandler.instance.CurrentControlScheme == InputHandler.PCScheme)
             {
-                mouseX = InputHandler.instance.LookVector.x * Time.deltaTime * sensX;
-                mouseY = InputHandler.instance.LookVector.y * Time.deltaTime * sensY;
+                _mouseX = InputHandler.instance.LookVector.x * Time.deltaTime * sensX;
+                _mouseY = InputHandler.instance.LookVector.y * Time.deltaTime * sensY;
             }
             else if (InputHandler.instance.CurrentControlScheme == InputHandler.GamepadScheme)
             {
-                mouseX = InputHandler.instance.LookVector.x * Time.deltaTime * gamepadSensX;
-                mouseY = InputHandler.instance.LookVector.y * Time.deltaTime * gamepadSensY;
+                _mouseX = InputHandler.instance.LookVector.x * Time.deltaTime * gamepadSensX;
+                _mouseY = InputHandler.instance.LookVector.y * Time.deltaTime * gamepadSensY;
             }
 
-            _yRotation += mouseX;
-            _xRotation -= mouseY;
+            _yRotation += _mouseX;
+            _xRotation -= _mouseY;
             _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
-            
-            pivot.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-            transform.Rotate(Vector3.up * mouseX);
         }
 
         private void FixedUpdate()
         {
             // cam.transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
             // transform.rotation = Quaternion.Euler(0, _yRotation, 0);
+            
+            pivot.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+            transform.Rotate(Vector3.up * _mouseX);
+            // Quaternion target = Quaternion.Euler(0, _mouseX, 0);
+            // transform.rotation = Quaternion.RotateTowards(transform.rotation, target, 1f);
         }
     }
 }

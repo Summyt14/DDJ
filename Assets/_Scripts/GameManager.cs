@@ -39,6 +39,9 @@ namespace _Scripts
 
         private void Start()
         {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 60;
+            
             foreach (Transform spawnPoint in enemySpawnPoints)
             {
                 Enemy.Enemy enemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity).GetComponent<Enemy.Enemy>();
